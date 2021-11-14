@@ -1,2 +1,0 @@
-# Sabun_Carotine
- UAS - (IF570) PEMROGRAMAN APLIKASI MOBILE
