@@ -11,8 +11,10 @@
         android:roundIcon="@drawable/icon_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Carotine">
-
-
+        <activity
+            android:name=".TaskDetail"
+            android:parentActivityName=".MainActivity"
+            android:exported="true" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -22,7 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package id.ac.umn.carotine;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
@@ -21,6 +22,7 @@ import id.ac.umn.carotine.Utils.DatabaseHandler;
 public class MainActivity extends AppCompatActivity implements DialogCloseListener{
 
     private RecyclerView taskRecyclerView;
+    private RecyclerView taskRecyclerView2;
     private ToDoAdapter taskAdapter;
     private FloatingActionButton fab;
 
@@ -39,12 +41,18 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         taskList = new ArrayList<>();
 
         taskRecyclerView = findViewById(R.id.tasksRecyclerView);
+        taskRecyclerView2 = findViewById(R.id.tasksRecyclerView2);
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
 
         taskAdapter = new ToDoAdapter(db, this);
         taskRecyclerView.setAdapter(taskAdapter);
 
         fab = findViewById(R.id.fab);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(taskAdapter));
+        itemTouchHelper.attachToRecyclerView(taskRecyclerView);
+
 
         taskList = db.getAllTasks();
         Collections.reverse(taskList);
