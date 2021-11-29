@@ -18,4 +18,8 @@
     <color name="pastel_darkBlue">#BFDBEF</color>
     <color name="pastel_lightBlue">#daeaf6</color>
     <color name="pastel_green">#b8e0d2</color>
+
+    <color name="colorPrimary">#1E2538</color>
+    <color name="colorPrimaryDark">#0E121B</color>
+    <color name="colorAccent">#F5FA55</color>
 </resources>
