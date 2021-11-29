@@ -1,7 +1,6 @@
-package id.ac.umn.sabun_carotine;
+package id.ac.umn.carotine;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 /**

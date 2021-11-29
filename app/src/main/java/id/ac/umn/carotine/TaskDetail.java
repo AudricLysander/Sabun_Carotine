@@ -1,14 +1,17 @@
 package id.ac.umn.carotine;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-
 import android.app.Notification;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,9 +20,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import id.ac.umn.carotine.Adapter.MyMediaPlayer;
 import id.ac.umn.carotine.Adapter.ToDoAdapter;
+import id.ac.umn.carotine.Model.AudioModel;
 
 public class TaskDetail extends AppCompatActivity implements DialogCloseListener, View.OnClickListener {
 
@@ -62,6 +69,14 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
         STOPPED
     }
 
+    // Music Player
+    private ImageView btnMusic;
+    ArrayList<AudioModel> songsList;
+    AudioModel currentSong;
+    MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
+    int x=0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +109,20 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
         initListeners();
         // Notification
         notificationManager = NotificationManagerCompat.from(this);
+
+        // Music Player
+        btnMusic = findViewById(R.id.btnMusic);
+        btnMusic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentProfile = new Intent(TaskDetail.this, MusicPlayer.class);
+                startActivityForResult(intentProfile, 1);
+            }
+        });
+
+        songsList = (ArrayList<AudioModel>) getIntent().getSerializableExtra("LIST");
+        setResourcesWithMusic();
+
     }
 
     // Method inisialisasi view
@@ -221,6 +250,10 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
 
                 // Ubah status waktu jadi stop
                 timerStatus = TimerStatus.STOPPED;
+
+                // Music Player
+                mediaPlayer.reset();
+                MyMediaPlayer.currentIndex -= 1;
             }
 
         }.start();
@@ -256,4 +289,42 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
     public void handleDialogClose(DialogInterface dialog) {
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+
+            }
+        }
+    }
+
+    void setResourcesWithMusic() {
+//        if(MyMediaPlayer.currentIndex == -1) {
+//            currentSong = songsList.get(MyMediaPlayer.currentIndex);
+//            playMusic();
+//        }
+        Log.i(TAG, "setResourcesWithMusic: " + MyMediaPlayer.currentIndex);
+
+        if(MyMediaPlayer.currentIndex == -1){
+            Log.i(TAG, "engga");
+        } else {
+            Log.i(TAG, "ada");
+            currentSong = songsList.get(MyMediaPlayer.currentIndex);
+            playMusic();
+        }
+    }
+
+    private void playMusic() {
+        mediaPlayer.reset();
+        try {
+            mediaPlayer.setDataSource(currentSong.getPath());
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

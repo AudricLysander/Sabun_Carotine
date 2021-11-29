@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:text="" />
 
         <TextView
@@ -97,5 +97,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:src="@drawable/timer_play_arrow" />
+
+    <ImageView
+        android:id="@+id/btnMusic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/imageViewStartStop"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_baseline_library_music" />
 </RelativeLayout>
 

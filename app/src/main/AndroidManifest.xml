@@ -3,19 +3,28 @@
     package="id.ac.umn.carotine">
 
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name="App"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/icon_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/icon_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Carotine">
         <activity
-            android:name=".TaskDetail"
-            android:parentActivityName=".MainActivity"
+            android:name=".MusicPlaying"
             android:exported="true" />
+        <activity
+            android:name=".MusicPlayer"
+            android:exported="true"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
+        <activity
+            android:name=".TaskDetail"
+            android:exported="true"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
