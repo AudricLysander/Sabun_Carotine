@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setTitle("To Do List");
+        getSupportActionBar().setTitle("Carotine");
 
         db = new DatabaseHandler(this);
         db.openDatabase();
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
         taskList = new ArrayList<>();
 
         taskRecyclerView = findViewById(R.id.tasksRecyclerView);
-        taskRecyclerView2 = findViewById(R.id.tasksRecyclerView2);
+//        taskRecyclerView2 = findViewById(R.id.tasksRecyclerView2);
         taskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 

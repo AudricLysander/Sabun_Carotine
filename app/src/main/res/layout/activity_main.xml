@@ -34,7 +34,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="15dp"
-            android:text="Today"
+            android:text="List"
             android:fontFamily="@font/gaegu"
             android:textColor="@color/black"
             android:textSize="32sp"
@@ -53,39 +53,39 @@
     </RelativeLayout>
 
 <!--    Completed-->
-    <RelativeLayout
-        android:id="@+id/cardCompleted"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/cardToday"
-        android:background="@drawable/custom_card_blue">
-        <TextView
-            android:id="@+id/labelCompleted"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginLeft="15dp"
-            android:text="Completed"
-            android:fontFamily="@font/gaegu"
-            android:textColor="@color/black"
-            android:textSize="32sp"
-            android:background="@drawable/custom_fullcard_blue"
-            android:gravity="center" />
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tasksRecyclerView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_below="@id/labelCompleted"
-            android:nestedScrollingEnabled="true"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </RelativeLayout>
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/cardCompleted"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="16dp"-->
+<!--        android:layout_marginRight="16dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:layout_below="@id/cardToday"-->
+<!--        android:background="@drawable/custom_card_blue">-->
+<!--        <TextView-->
+<!--            android:id="@+id/labelCompleted"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            android:layout_marginLeft="15dp"-->
+<!--            android:text="Completed"-->
+<!--            android:fontFamily="@font/gaegu"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="32sp"-->
+<!--            android:background="@drawable/custom_fullcard_blue"-->
+<!--            android:gravity="center" />-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/tasksRecyclerView2"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="15dp"-->
+<!--            android:layout_marginRight="15dp"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            android:layout_below="@id/labelCompleted"-->
+<!--            android:nestedScrollingEnabled="true"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />-->
+<!--    </RelativeLayout>-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
