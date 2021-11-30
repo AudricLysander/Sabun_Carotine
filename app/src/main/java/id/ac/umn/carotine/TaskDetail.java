@@ -33,15 +33,12 @@ import id.ac.umn.carotine.Model.AudioModel;
 
 public class TaskDetail extends AppCompatActivity implements DialogCloseListener, View.OnClickListener {
 
+    // Task
     private ToDoAdapter adapter;
-
     private int position, id;
     private String task;
 
-    public Button editTaskBtn, startTimerBtn;
-    public TextView taskName;
-
-    // Count Down Timer Initialize
+    // Count Down Timer Initialize & Notification
     private long timeCountInMilliSeconds = 1 * 60000;
     private TimerStatus timerStatus = TimerStatus.STOPPED;
     private ProgressBar progressBarCircle;
@@ -50,6 +47,8 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
     private ImageView imageViewReset;
     private ImageView imageViewStartStop;
     private CountDownTimer countDownTimer;
+    public Button editTaskBtn, startTimerBtn;
+    public TextView taskName;
 
     // Notification
     private NotificationManagerCompat notificationManager;
@@ -84,7 +83,6 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
     MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
     int x=0;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,10 +109,10 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
             }
         });
 
-        // Method untuk memanggil inisialisasi view yang akan dipakai
+        // Count Down Timer
         initViews();
-        // Method untuk memanggil inisialisasi listener yang akan dipakai
         initListeners();
+
         // Notification
         notificationManager = NotificationManagerCompat.from(this);
 
@@ -133,7 +131,8 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
 
     }
 
-    // Method inisialisasi view
+    // START CODE UNTUK COUNT DOWN TIMER -----------------------------------------------------------
+    // Count Down Timer Initialize
     private void initViews() {
         progressBarCircle = (ProgressBar) findViewById(R.id.progressBarCircle);
         editTextMinute = (EditText) findViewById(R.id.editTextMinute);
@@ -142,13 +141,11 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
         imageViewStartStop = (ImageView) findViewById(R.id.imageViewStartStop);
     }
 
-    // Method inisialisasi listener
     private void initListeners() {
         imageViewReset.setOnClickListener(this);
         imageViewStartStop.setOnClickListener(this);
     }
 
-    // Implementasi method listener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -161,102 +158,56 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
         }
     }
 
-    // Method untuk restart waktu
     private void reset() {
         stopCountDownTimer();
         startCountDownTimer();
     }
 
-    // Method untuk mulai dan stop waktu
     private void startStop() {
         if (timerStatus == TimerStatus.STOPPED) {
-            // Memanggil fungsi inisialisasi values dari timer
             setTimerValues();
-
-            // Memanggil fungsi inisialisasi progress bar
             setProgressBarValues();
-
-            // Menampilkan icon
             imageViewReset.setVisibility(View.VISIBLE);
             imageViewStartStop.setImageResource(R.drawable.timer_stop);
-
-            // Buat edit text disable
             editTextMinute.setEnabled(false);
-
-            // Ubah status waktu jadi mulai
             timerStatus = TimerStatus.STARTED;
-
-            // Memanggil fungsi startcountdown biar waktunya jalan
             startCountDownTimer();
-
         } else {
-
-            // Sembunyiin ikon reset
             imageViewReset.setVisibility(View.GONE);
-
-            // Ubah ikon stop jadi start
             imageViewStartStop.setImageResource(R.drawable.timer_play_arrow);
-
-            // Buat teks input waktu jadi able
             editTextMinute.setEnabled(true);
-
-            // Ubah status waktu jadi stop
             timerStatus = TimerStatus.STOPPED;
-
-            // Memanggil fungsi stopcountdown biar waktunya berhenti
             stopCountDownTimer();
         }
 
     }
 
-    // Method untuk inisialisasi value untuk count down
     private void setTimerValues() {
         int time = 0;
         if (!editTextMinute.getText().toString().isEmpty()) {
-            // Ambil data number dari edit text
             time = Integer.parseInt(editTextMinute.getText().toString().trim());
         } else {
-            // Membuat toast agar terisi di edit text
             Toast.makeText(getApplicationContext(), getString(R.string.message_minutes), Toast.LENGTH_LONG).show();
         }
-        // convert waktu
         timeCountInMilliSeconds = time * 60 * 1000;
     }
 
-    // Method untuk mulai count down
     private void startCountDownTimer() {
         countDownTimer = new CountDownTimer(timeCountInMilliSeconds, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                // Ubah text view
                 textViewTime.setText(hmsTimeFormatter(millisUntilFinished));
-
-                // Ubah progress barnya biar menyesuaikan waktu
                 progressBarCircle.setProgress((int) (millisUntilFinished / 1000));
             }
 
             @Override
             public void onFinish() {
-
-                // Notification
                 sendOnChannel1();
-
-                // Ubah text view biar kembali jadi awal input
                 textViewTime.setText(hmsTimeFormatter(timeCountInMilliSeconds));
-
-                // Ubah progress bar biar kembali jadi awal input
                 setProgressBarValues();
-
-                // Menyembunyikan ikon reset
                 imageViewReset.setVisibility(View.GONE);
-
-                // Ubah ikon stop jadi play
                 imageViewStartStop.setImageResource(R.drawable.timer_play_arrow);
-
-                // Ubah text view jadi able
                 editTextMinute.setEnabled(true);
-
-                // Ubah status waktu jadi stop
                 timerStatus = TimerStatus.STOPPED;
 
                 // Music Player
@@ -268,18 +219,15 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
         countDownTimer.start();
     }
 
-    // Method untuk stop count down, jadi ulang waktu dari awal kalau pencet start
     private void stopCountDownTimer() {
         countDownTimer.cancel();
     }
 
-    // Method untuk set progress bar, biar sesuai dengan waktu
     private void setProgressBarValues() {
         progressBarCircle.setMax((int) timeCountInMilliSeconds / 1000);
         progressBarCircle.setProgress((int) timeCountInMilliSeconds / 1000);
     }
 
-    // Method untuk convert milisecond ke format waktu hour : minute : second
     private String hmsTimeFormatter(long milliSeconds) {
         String hms = String.format("%02d:%02d:%02d",
                 TimeUnit.MILLISECONDS.toHours(milliSeconds),
@@ -287,6 +235,7 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
                 TimeUnit.MILLISECONDS.toSeconds(milliSeconds) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milliSeconds)));
         return hms;
     }
+    // STOP CODE UNTUK COUNT DOWN TIMER -----------------------------------------------------------
 
     public void editTask(int id, String task) {
         adapter.editTask(id, task);
@@ -294,9 +243,7 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
     }
 
     @Override
-    public void handleDialogClose(DialogInterface dialog) {
-
-    }
+    public void handleDialogClose(DialogInterface dialog) { }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
