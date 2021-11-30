@@ -16,14 +16,20 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <CheckBox
-            android:id="@+id/todoCheckBox"
+        <FrameLayout
+            android:id="@+id/fLayout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:buttonTint="@color/black"
-            android:paddingStart="8dp"
-            android:textSize="16dp"
-            tool:text="Sample Task that will added here." />
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:id="@+id/todoCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/black"
+                android:paddingStart="8dp"
+                android:textSize="16dp"
+                tool:text="Sample Task that will added here."
+                android:longClickable="true"/>
+        </FrameLayout>
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -50,6 +50,8 @@
             android:layout_below="@id/labelToday"
             android:nestedScrollingEnabled="true"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
     </RelativeLayout>
 
 <!--    Completed-->

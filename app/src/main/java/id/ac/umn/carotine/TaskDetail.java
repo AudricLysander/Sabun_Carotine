@@ -90,24 +90,11 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
         getSupportActionBar().setTitle("Focus"); //set title di bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //biar ada tombol kembali
 
-        adapter = new ToDoAdapter(this);
-
-        startTimerBtn = findViewById(R.id.startTimerBtn);
-        editTaskBtn = findViewById(R.id.editTaskBtn);
-
         taskName = findViewById(R.id.taskName);
         Intent mainIntent = getIntent();
-        taskName.setText(mainIntent.getStringExtra("taskName"));
-
-        id = mainIntent.getIntExtra("taskId", 0);
-        task = mainIntent.getStringExtra("taskName");
-
-        editTaskBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editTask(id, task);
-            }
-        });
+//        taskName.setText(mainIntent.getStringExtra("taskName"));
+        task = (mainIntent.getStringExtra("taskName"));
+        taskName.setText(task);
 
         // Count Down Timer
         initViews();
@@ -237,11 +224,6 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
     }
     // STOP CODE UNTUK COUNT DOWN TIMER -----------------------------------------------------------
 
-    public void editTask(int id, String task) {
-        adapter.editTask(id, task);
-//        AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
-    }
-
     @Override
     public void handleDialogClose(DialogInterface dialog) { }
 
@@ -256,10 +238,6 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
     }
 
     void setResourcesWithMusic() {
-//        if(MyMediaPlayer.currentIndex == -1) {
-//            currentSong = songsList.get(MyMediaPlayer.currentIndex);
-//            playMusic();
-//        }
         Log.i(TAG, "setResourcesWithMusic: " + MyMediaPlayer.currentIndex);
 
         if(MyMediaPlayer.currentIndex == -1){

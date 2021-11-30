@@ -1,17 +1,22 @@
 package id.ac.umn.carotine.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 import java.util.List;
 import id.ac.umn.carotine.AddNewTask;
 import id.ac.umn.carotine.MainActivity;
@@ -22,18 +27,11 @@ import id.ac.umn.carotine.Utils.DatabaseHandler;
 
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
+    private ArrayList<Integer> listCheckedCheckBox = new ArrayList<>();
+
     private List<ToDoModel> todoList;
     private MainActivity activity;
-    private TaskDetail activityTD;
     private DatabaseHandler db;
-
-    public ToDoAdapter(TaskDetail activity) {
-        this.activityTD = activity;
-    }
-
-    public ToDoAdapter(MainActivity activity) {
-        this.activity = activity;
-    }
 
     public ToDoAdapter(DatabaseHandler db, MainActivity activity) {
         this.db = db;
@@ -56,12 +54,17 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         holder.task.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                int currPos = holder.getAdapterPosition();
+
                 if(isChecked) {
                     db.updateStatus(item.getId(), 1);
                     Log.d("TAG", "onCheckedChanged: TerKlikk");
+                    holder.task.setPaintFlags(holder.task.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                    deleteItem(currPos);
                 } else {
                     db.updateStatus(item.getId(), 0);
                     Log.d("TAG", "onCheckedChanged: Batal TerKlikk");
+                    holder.task.setPaintFlags(0);
                 }
             }
         });
@@ -88,30 +91,47 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     public void deleteItem(int position) {
         ToDoModel item = todoList.get(position);
-        db.deleteTask(item.getId());
-        todoList.remove(position);
-        notifyItemRemoved(position);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("It's Completed!");
+        builder.setMessage("Do you want to delete this task?");
+        builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+            db.deleteTask(item.getId());
+            todoList.remove(position);
+            notifyItemRemoved(position);
+                }
+            });
+
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialogInterface, int i) {
+                notifyItemChanged(position);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
-    public void editItem(int position) {
+    public void showItemDetail(int position) {
         Log.d("TAG", "editItem: " + position);
         Intent intent = new Intent(this.activity, TaskDetail.class);
         ToDoModel item = todoList.get(position);
         intent.putExtra("taskId", item.getId());
         intent.putExtra("taskName", item.getTask());
         activity.startActivity(intent);
-
     }
-    
-    public void editTask(int id, String taskName) {
-        Log.d("TAG", "editTask: Oke");
 
+    public void editItem(int position) {
+        ToDoModel item = todoList.get(position);
         Bundle bundle = new Bundle();
-        bundle.putInt("id", id);
-        bundle.putString("task", taskName);
+        bundle.putInt("id", item.getId());
+        bundle.putString("task", item.getTask());
         AddNewTask fragment = new AddNewTask();
         fragment.setArguments(bundle);
-        fragment.show(activityTD.getSupportFragmentManager(), AddNewTask.TAG);
+        fragment.show(activity.getSupportFragmentManager(), AddNewTask.TAG);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

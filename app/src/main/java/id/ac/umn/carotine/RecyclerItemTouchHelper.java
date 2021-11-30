@@ -1,10 +1,6 @@
 package id.ac.umn.carotine;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -33,25 +29,10 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
         final int position = viewHolder.getAdapterPosition(); //posisi element yang sedang ditunjuk
         if (direction == ItemTouchHelper.LEFT) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(adapter.getContext());
-            builder.setTitle("Delete Task");
-            builder.setMessage("Are you sure you want to delete this task?");
-            builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    adapter.deleteItem(position);
-                }
-            });
-
-            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    adapter.notifyItemChanged(viewHolder.getAdapterPosition());
-                }
-            });
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        } else {
+//            buat untuk ke focus mode
+            adapter.showItemDetail(position);
+        } else if(direction == ItemTouchHelper.RIGHT) {
+//            buat untuk ke edit mode
             adapter.editItem(position);
         }
     }
@@ -70,8 +51,8 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
             icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_baseline_edit);
             bg = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.yellow));
         } else {
-            icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_baseline_delete);
-            bg = new ColorDrawable(Color.RED);
+            icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_baseline_bedtime);
+            bg = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.green_lime));
         }
 
         int iconMargin = (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;

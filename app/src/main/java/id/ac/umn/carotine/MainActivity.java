@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements DialogCloseListen
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(taskAdapter));
         itemTouchHelper.attachToRecyclerView(taskRecyclerView);
-
 
         taskList = db.getAllTasks();
         Collections.reverse(taskList);
