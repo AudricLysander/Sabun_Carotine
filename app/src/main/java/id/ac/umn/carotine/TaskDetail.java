@@ -5,7 +5,10 @@ import static android.content.ContentValues.TAG;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -51,13 +54,18 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
     // Notification
     private NotificationManagerCompat notificationManager;
     public void sendOnChannel1(){
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        PendingIntent resultPendingIntent = PendingIntent.getActivities(this, 1, new Intent[]{resultIntent}, PendingIntent.FLAG_UPDATE_CURRENT);
         String title = "Time's up!!!";
         String message = "Let's check your next work!";
 
         Notification notification = new NotificationCompat.Builder(this, App.CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.icon_launcher)
+                .setSmallIcon(R.drawable.ic_baseline_notifications)
+                .setColor(ContextCompat.getColor(this, R.color.pastel_darkBlue))
                 .setContentTitle(title)
                 .setContentText(message)
+                .setAutoCancel(true)
+                .setContentIntent(resultPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .build();
         notificationManager.notify(1, notification);
