@@ -108,8 +108,8 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
         btnMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentProfile = new Intent(TaskDetail.this, MusicPlayer.class);
-                startActivityForResult(intentProfile, 1);
+                Intent intentMusic = new Intent(TaskDetail.this, MusicPlayer.class);
+                startActivityForResult(intentMusic, 1);
             }
         });
 
