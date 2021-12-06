@@ -60,6 +60,10 @@ public class AddNewTask extends BottomSheetDialogFragment {
             if(task.length() >= 0)
                 newTaskSaveButton.setTextColor(ContextCompat.getColor(getContext(), R.color.design_default_color_primary_dark));
         }
+
+        if(!isUpdate) {
+            newTaskSaveButton.setEnabled(false);
+        }
         newTaskText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
