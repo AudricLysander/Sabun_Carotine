@@ -49,10 +49,10 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
 
         if (dX > 0) {
             icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_baseline_edit);
-            bg = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.yellow));
+            bg = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.pastel_orange));
         } else {
             icon = ContextCompat.getDrawable(adapter.getContext(), R.drawable.ic_baseline_bedtime);
-            bg = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.green_lime));
+            bg = new ColorDrawable(ContextCompat.getColor(adapter.getContext(), R.color.pastel_otherBlue));
         }
 
         int iconMargin = (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;

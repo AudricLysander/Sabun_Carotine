@@ -8,16 +8,19 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#FFD600</color>
-
-    <color name="dark_blue">#809BCE</color>
     <color name="green_lime">#6FDB40</color>
     <color name="tosca">#b8e0d2</color>
 
+    <color name="dark_blue">#809BCE</color>
     <color name="gray">#C8C8C8</color>
     <color name="pastel_purple">#e8dff5</color>
     <color name="pastel_darkBlue">#BFDBEF</color>
     <color name="pastel_lightBlue">#daeaf6</color>
     <color name="pastel_green">#b8e0d2</color>
+    <color name="pastel_yellow">#fcf4dd</color>
+    <color name="pastel_pink">#FCE1E4</color>
+    <color name="pastel_orange">#FFC888</color>
+    <color name="pastel_otherBlue">#95b8d1</color>
 
     <color name="colorPrimary">#1E2538</color>
     <color name="colorPrimaryDark">#0E121B</color>

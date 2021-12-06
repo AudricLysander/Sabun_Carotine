@@ -3,32 +3,35 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#EFEFEF"
+    android:background="@color/pastel_orange"
     android:layout_marginTop="5dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:paddingLeft="20dp"
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
         android:id="@+id/icon_view"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="0dp"
+        android:layout_height="37dp"
         android:layout_centerVertical="true"
+        android:background="@color/pastel_orange"
          />
 
     <TextView
         android:id="@+id/music_title_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/icon_view"
         android:layout_centerVertical="true"
-        android:padding="10dp"
-        android:maxLines="1"
+        android:layout_toEndOf="@id/icon_view"
+        android:background="@color/pastel_orange"
         android:ellipsize="end"
-        tools:text="Music"
-        android:textColor="@color/black" />
+        android:fontFamily="@font/fresca"
+        android:maxLines="1"
+        android:padding="12dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        tools:text="Music" />
 
 
 </RelativeLayout>

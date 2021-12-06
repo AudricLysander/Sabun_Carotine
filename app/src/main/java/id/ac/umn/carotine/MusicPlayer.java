@@ -37,7 +37,6 @@ public class MusicPlayer extends AppCompatActivity {
         adapter = new MusicListAdapter();
         adapter.getTaskName(task);
 
-
         recyclerView = findViewById(R.id.recycle_view);
         noMusicTextView = findViewById(R.id.no_songs_text);
 
@@ -85,6 +84,7 @@ public class MusicPlayer extends AppCompatActivity {
             Toast.makeText(MusicPlayer.this, "READ PERMISSION IS REQUIRED, PLEASE ALLOW FROM SETTINGS", Toast.LENGTH_SHORT).show();
         } else {
             ActivityCompat.requestPermissions(MusicPlayer.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},123);
+            this.recreate();
         }
     }
 

@@ -27,19 +27,21 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/custom_card_green">
+
         <TextView
             android:id="@+id/labelToday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:layout_marginLeft="15dp"
-            android:text="List"
-            android:fontFamily="@font/gaegu"
-            android:textColor="@color/black"
-            android:textSize="32sp"
             android:background="@drawable/custom_fullcard_green"
-            android:gravity="center" />
+            android:fontFamily="@font/gaegu"
+            android:gravity="center"
+            android:text="List"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="32sp" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksRecyclerView"
             android:layout_width="match_parent"
