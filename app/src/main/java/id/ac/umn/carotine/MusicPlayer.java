@@ -85,6 +85,7 @@ public class MusicPlayer extends AppCompatActivity {
             Toast.makeText(MusicPlayer.this, "READ PERMISSION IS REQUIRED, PLEASE ALLOW FROM SETTINGS", Toast.LENGTH_SHORT).show();
         } else {
             ActivityCompat.requestPermissions(MusicPlayer.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},123);
+            this.recreate();
         }
     }
 
