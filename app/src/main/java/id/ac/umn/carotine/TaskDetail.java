@@ -88,7 +88,7 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_detail);
         getSupportActionBar().setTitle("Focus"); //set title di bar
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //biar ada tombol kembali
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //biar ada tombol kembali
 
         taskName = findViewById(R.id.taskName);
         Intent mainIntent = getIntent();

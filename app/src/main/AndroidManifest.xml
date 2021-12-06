@@ -24,7 +24,6 @@
         <activity
             android:name=".TaskDetail"
             android:exported="true"
-            android:parentActivityName=".MainActivity"
             android:launchMode="singleTop" />
         <activity
             android:name=".SplashActivity"
@@ -37,6 +36,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             />
     </application>
 
