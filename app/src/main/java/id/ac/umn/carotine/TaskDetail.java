@@ -36,7 +36,7 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
     // Task
     private ToDoAdapter adapter;
     private int position, id;
-    private String task;
+    private static String task;
 
     // Count Down Timer Initialize & Notification
     private long timeCountInMilliSeconds = 1 * 60000;
@@ -92,7 +92,6 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
 
         taskName = findViewById(R.id.taskName);
         Intent mainIntent = getIntent();
-//        taskName.setText(mainIntent.getStringExtra("taskName"));
         task = (mainIntent.getStringExtra("taskName"));
         taskName.setText(task);
 
@@ -108,8 +107,9 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
         btnMusic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentMusic = new Intent(TaskDetail.this, MusicPlayer.class);
-                startActivityForResult(intentMusic, 1);
+                Intent intentProfile = new Intent(TaskDetail.this, MusicPlayer.class);
+                intentProfile.putExtra("taskName", task);
+                startActivityForResult(intentProfile, 1);
             }
         });
 
@@ -240,12 +240,16 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
     void setResourcesWithMusic() {
         Log.i(TAG, "setResourcesWithMusic: " + MyMediaPlayer.currentIndex);
 
-        if(MyMediaPlayer.currentIndex == -1){
-            Log.i(TAG, "engga");
-        } else {
-            Log.i(TAG, "ada");
-            currentSong = songsList.get(MyMediaPlayer.currentIndex);
-            playMusic();
+        try {
+            if(MyMediaPlayer.currentIndex == -1){
+                Log.i(TAG, "engga");
+            } else {
+                Log.i(TAG, "ada");
+                currentSong = songsList.get(MyMediaPlayer.currentIndex);
+                playMusic();
+            }
+        } catch (NullPointerException e) {
+            e.getMessage();
         }
     }
 
@@ -258,6 +262,13 @@ public class TaskDetail extends AppCompatActivity implements DialogCloseListener
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent backToMain = new Intent(TaskDetail.this, MainActivity.class);
+        startActivity(backToMain);
+        finish();
     }
 
 }

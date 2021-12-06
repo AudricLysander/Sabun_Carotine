@@ -16,7 +16,6 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 import id.ac.umn.carotine.AddNewTask;
 import id.ac.umn.carotine.MainActivity;
@@ -26,8 +25,6 @@ import id.ac.umn.carotine.TaskDetail;
 import id.ac.umn.carotine.Utils.DatabaseHandler;
 
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
-
-    private ArrayList<Integer> listCheckedCheckBox = new ArrayList<>();
 
     private List<ToDoModel> todoList;
     private MainActivity activity;
@@ -122,6 +119,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         intent.putExtra("taskId", item.getId());
         intent.putExtra("taskName", item.getTask());
         activity.startActivity(intent);
+        onFinish();
     }
 
     public void editItem(int position) {
@@ -141,5 +139,9 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
             super(view);
             task = view.findViewById(R.id.todoCheckBox);
         }
+    }
+
+    protected void onFinish() {
+        activity.finish();
     }
 }

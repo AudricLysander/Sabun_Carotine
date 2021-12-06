@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -23,10 +24,19 @@ public class MusicPlayer extends AppCompatActivity {
     TextView noMusicTextView;
     ArrayList<AudioModel> songsList = new ArrayList<>();
 
+    private MusicListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_music_player);
+
+        Intent tDetail = getIntent();
+        String task = tDetail.getStringExtra("taskName");
+
+        adapter = new MusicListAdapter();
+        adapter.getTaskName(task);
+
 
         recyclerView = findViewById(R.id.recycle_view);
         noMusicTextView = findViewById(R.id.no_songs_text);
