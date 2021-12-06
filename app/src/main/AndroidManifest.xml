@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Carotine">
         <activity
-            android:name=".MusicPlaying"
-            android:exported="true" />
-        <activity
             android:name=".MusicPlayer"
             android:exported="true"
             android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar" />
